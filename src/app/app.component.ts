@@ -12,13 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
   ngOnInit() {
-    this.apiService.getMessage().subscribe({
-      next: (data) => {
-        this.message = data.message;
-      },
-      error: (error) => {
-        console.error('Erro ao buscar mensagem:', error);
-      }
-    });
+
   }
 }
