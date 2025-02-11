@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = 'http://127.0.0.1:8000/api/message'; // URL correta
+  private apiUrl = 'http://127.0.0.1:8000/api/message'; 
 
   constructor(private http: HttpClient) {}
 
   getMessage(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);  // Agora chama o Laravel corretamente
+    return this.http.get<any>(this.apiUrl);
   }
 }
