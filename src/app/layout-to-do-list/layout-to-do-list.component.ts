@@ -8,10 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LayoutToDoListComponent {
   novaTarefa: string = '';
-  tarefas: string[] = [];
+  tarefas: any[] = [];
   apiUrlCriar = 'http://localhost:8000/api/ctodo';
   apiUrlRecuperar = 'http://localhost:8000/api/rtodos';
   constructor(private http: HttpClient) { } 
+
+  ngOnInit(): void {
+    this.carregarTarefas();
+  }
+
   adicionarTarefa() {
     if (this.novaTarefa.trim()) {
       const dto = { 
@@ -34,11 +39,6 @@ export class LayoutToDoListComponent {
 
   removerTarefa(index: number) {
     this.tarefas.splice(index, 1);
-  }
-
-  ngOnInit(): void {
-    // Chama a função para pegar as tarefas ao carregar o componente
-    this.carregarTarefas();
   }
 
   carregarTarefas() {
