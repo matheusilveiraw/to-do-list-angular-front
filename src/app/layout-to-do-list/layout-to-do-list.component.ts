@@ -19,6 +19,7 @@ export class LayoutToDoListComponent {
 
   adicionarTarefa() {
     if (this.novaTarefa.trim()) {
+      debugger
       const dto = { 
         descricao: this.novaTarefa,  
         status: 0,     
@@ -41,11 +42,17 @@ export class LayoutToDoListComponent {
     this.tarefas.splice(index, 1);
   }
 
+  finalizarTarefa(index: number) { 
+
+  }
+
+  editarTarefa(index: number) { 
+
+  }
+
   carregarTarefas() {
-    console.log('Recuperando tarefas do backend...');
     this.http.get<string[]>(this.apiUrlRecuperar).subscribe(
       (response) => {
-        console.log('Tarefas recebidas:', response);
         this.tarefas = response; 
       },
       (error) => {
