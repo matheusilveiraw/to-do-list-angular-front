@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center h-screen bg-gray-100">
-  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[500px]">
     <h2 class="text-xl font-semibold mb-4 text-center">To-Do List</h2>
 
     <div class="flex mb-4">
@@ -10,7 +10,8 @@
       </button>
     </div>
 
-    <ul class="space-y-2">
+    <!-- Definição de altura máxima e rolagem interna -->
+    <ul class="space-y-2 max-h-[700px] overflow-y-auto">
       <li *ngFor="let tarefa of tarefas; let i = index"
         class="flex justify-between items-center bg-gray-200 p-2 rounded">
         
