@@ -6,6 +6,7 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: "./layout-to-do-list.component.html",
   styleUrls: ["./layout-to-do-list.component.css"],
 })
+
 export class LayoutToDoListComponent {
   novaTarefa: string = "";
   tarefas: any[] = [];
