@@ -9,10 +9,7 @@ import { HttpClient } from "@angular/common/http";
 export class LayoutToDoListComponent {
   novaTarefa: string = "";
   tarefas: any[] = [];
-  apiUrlCriar = "http://localhost:8000/api/ctodo";
-  apiUrlRecuperar = "http://localhost:8000/api/rtodos";
-  apiUrlDeletar = 'http://localhost:8000/api/rtodo';
-  apiUrlEditar = 'http://localhost:8000/api/atttodo';
+  apiUrl = "http://localhost:8000/api/";
   modalEdicaoAberto = false;
   tarefaParaEditar: any = null;
   descricaoEditada: string = '';
@@ -29,10 +26,10 @@ export class LayoutToDoListComponent {
         status: 0,
       };
 
-      this.http.post<{ descricao: string }>(this.apiUrlCriar, dto).subscribe(
+      this.http.post<{ descricao: string }>(`${this.apiUrl}ctodo`, dto).subscribe(
         (response) => {
           console.log('Tarefa criada com sucesso:', response);
-          this.tarefas.push(response.descricao);
+          this.tarefas.push(response);
           this.novaTarefa = '';
         },
         (error) => {
@@ -45,7 +42,7 @@ export class LayoutToDoListComponent {
   removerTarefa(index: number) {
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
       this.http
-        .delete(`${this.apiUrlDeletar}/${this.tarefas[index].id}`)
+        .delete(`${this.apiUrl}rtodo/${this.tarefas[index].id}`)
         .subscribe(() => {
           this.tarefas.splice(index, 1);
         });
@@ -70,7 +67,7 @@ export class LayoutToDoListComponent {
       const id = this.tarefaParaEditar.id;
 
       this.http
-        .put(`${this.apiUrlEditar}/${id}`, { 
+        .put(`${this.apiUrl}atttodo/${id}`, { 
           descricao: this.descricaoEditada,
           status: this.tarefaParaEditar.status
         })
@@ -82,7 +79,7 @@ export class LayoutToDoListComponent {
   }
 
   carregarTarefas() {
-    this.http.get<string[]>(this.apiUrlRecuperar).subscribe(
+    this.http.get<string[]>(`${this.apiUrl}rtodos`).subscribe(
       (response) => {
         this.tarefas = response;
       },
