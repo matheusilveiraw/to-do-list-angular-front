@@ -24,11 +24,32 @@
           <button (click)="removerTarefa(i)" class="text-red-500 hover:text-red-700">
             ✖
           </button>
-          <button (click)="editarTarefa(i)" class="text-blue-500 hover:text-blue-700">
+          <button (click)="editarTarefa(tarefa)" class="text-blue-500 hover:text-blue-700">
             ✏
           </button>
         </div>
       </li>
     </ul>
+
+    <div *ngIf="modalEdicaoAberto" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] text-center">
+        <h3 class="text-lg font-semibold mb-4">Editar To-Do</h3>
+        
+        <input
+          [(ngModel)]="descricaoEditada"
+          class="border p-2 w-full rounded-md"
+          placeholder="Digite a nova descrição..."
+        />
+    
+        <div class="flex justify-around mt-4">
+          <button (click)="fecharModalEdicao()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+            Cancelar
+          </button>
+          <button (click)="salvarEdicao()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Salvar
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
