@@ -51,7 +51,15 @@ export class LayoutToDoListComponent {
     }
   }
 
-  finalizarTarefa(index: number) {}
+  finalizarTarefa(index: number) {
+    if (window.confirm('Tem certeza que deseja finalizar esta tarefa?')) {
+      this.http
+        .post(`${this.apiUrl}ftodo/${this.tarefas[index].id}`, { })
+        .subscribe(() => {
+          this.tarefas[index].status = 1;
+        });
+    }
+  }
 
   editarTarefa(tarefa: any) {
     this.tarefaParaEditar = tarefa;
