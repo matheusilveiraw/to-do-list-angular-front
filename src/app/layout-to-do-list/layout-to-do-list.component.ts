@@ -58,20 +58,24 @@ export class LayoutToDoListComponent {
 
   removerTarefa(index: number) {
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
+      this.abrirTelaDeCarregar();
       this.http
         .delete(`${this.apiUrl}rtodo/${this.tarefas[index].id}`)
         .subscribe(() => {
           this.tarefas.splice(index, 1);
+          this.fecharTelaDeCarregar();
         });
     }
   }
 
   finalizarTarefa(index: number) {
     if (window.confirm('Tem certeza que deseja finalizar esta tarefa?')) {
+      this.abrirTelaDeCarregar();
       this.http
         .post(`${this.apiUrl}ftodo/${this.tarefas[index].id}`, { })
         .subscribe(() => {
           this.tarefas[index].status = 1;
+          this.fecharTelaDeCarregar();
         });
     }
   }
@@ -91,12 +95,15 @@ export class LayoutToDoListComponent {
     if (this.tarefaParaEditar) {
       const id = this.tarefaParaEditar.id;
 
+      this.abrirTelaDeCarregar();
+
       this.http
         .put(`${this.apiUrl}atttodo/${id}`, {
           descricao: this.descricaoEditada,
           status: this.tarefaParaEditar.status,
         })
         .subscribe(() => {
+          this.fecharTelaDeCarregar();
           this.tarefaParaEditar.descricao = this.descricaoEditada;
           this.fecharModalEdicao();
         });
@@ -104,12 +111,16 @@ export class LayoutToDoListComponent {
   }
 
   carregarTarefas() {
+    this.abrirTelaDeCarregar();
+
     this.http.get<string[]>(`${this.apiUrl}rtodos`).subscribe(
       (response) => {
         this.tarefas = response;
+        this.fecharTelaDeCarregar();
       },
       (error) => {
         console.error('Erro ao recuperar as tarefas:', error);
+        this.fecharTelaDeCarregar();
       }
     );
   }
