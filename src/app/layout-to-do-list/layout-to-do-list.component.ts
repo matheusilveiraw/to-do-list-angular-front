@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-layout-to-do-list',
@@ -7,9 +7,9 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ['./layout-to-do-list.component.css'],
 })
 export class LayoutToDoListComponent {
-  novaTarefa: string = "";
+  novaTarefa: string = '';
   tarefas: any[] = [];
-  apiUrl = "http://localhost:8000/api/";
+  apiUrl = 'http://localhost:8000/api/';
   modalEdicaoAberto = false;
   tarefaParaEditar: any = null;
   descricaoEditada: string = '';
@@ -26,16 +26,18 @@ export class LayoutToDoListComponent {
         status: 0,
       };
 
-      this.http.post<{ descricao: string }>(`${this.apiUrl}ctodo`, dto).subscribe(
-        (response) => {
-          console.log('Tarefa criada com sucesso:', response);
-          this.tarefas.push(response);
-          this.novaTarefa = '';
-        },
-        (error) => {
-          console.error('Erro ao criar a tarefa:', error);
-        }
-      );
+      this.http
+        .post<{ descricao: string }>(`${this.apiUrl}ctodo`, dto)
+        .subscribe(
+          (response) => {
+            console.log('Tarefa criada com sucesso:', response);
+            this.tarefas.push(response);
+            this.novaTarefa = '';
+          },
+          (error) => {
+            console.error('Erro ao criar a tarefa:', error);
+          }
+        );
     }
   }
 
@@ -67,9 +69,9 @@ export class LayoutToDoListComponent {
       const id = this.tarefaParaEditar.id;
 
       this.http
-        .put(`${this.apiUrl}atttodo/${id}`, { 
+        .put(`${this.apiUrl}atttodo/${id}`, {
           descricao: this.descricaoEditada,
-          status: this.tarefaParaEditar.status
+          status: this.tarefaParaEditar.status,
         })
         .subscribe(() => {
           this.tarefaParaEditar.descricao = this.descricaoEditada;
@@ -84,7 +86,7 @@ export class LayoutToDoListComponent {
         this.tarefas = response;
       },
       (error) => {
-        console.error("Erro ao recuperar as tarefas:", error);
+        console.error('Erro ao recuperar as tarefas:', error);
       }
     );
   }
