@@ -13,11 +13,22 @@ export class LayoutToDoListComponent {
   modalEdicaoAberto = false;
   tarefaParaEditar: any = null;
   descricaoEditada: string = '';
+  isLoading: boolean = false; 
+
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.carregarTarefas();
   }
+
+  abrirTelaDeCarregar() {
+    this.isLoading = true; 
+  }
+
+  fecharTelaDeCarregar() {
+    this.isLoading = false; 
+  }
+
 
   adicionarTarefa() {
     if (this.novaTarefa.trim()) {
@@ -26,6 +37,8 @@ export class LayoutToDoListComponent {
         status: 0,
       };
 
+      this.abrirTelaDeCarregar();
+
       this.http
         .post<{ descricao: string }>(`${this.apiUrl}ctodo`, dto)
         .subscribe(
@@ -33,9 +46,11 @@ export class LayoutToDoListComponent {
             console.log('Tarefa criada com sucesso:', response);
             this.tarefas.push(response);
             this.novaTarefa = '';
+            this.fecharTelaDeCarregar();
           },
           (error) => {
             console.error('Erro ao criar a tarefa:', error);
+            this.fecharTelaDeCarregar();
           }
         );
     }
