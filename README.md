@@ -1,27 +1,86 @@
-# Frontend
+# 📝 To-Do List API & Frontend  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+Este é um projeto de **To-Do List** desenvolvido utilizando **Laravel (PHP) no backend** e **Angular no frontend**. O principal objetivo do projeto foi explorar a criação e consumo de **APIs** e a separação entre backend e frontend.  
 
-## Development server
+## 🚀 Tecnologias Utilizadas  
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 🔹 Backend  
+- **Laravel** (PHP) - Framework para criação da API  
+- **MySQL** - Banco de dados para armazenar as tarefas  
+- **Postman** - Testes das requisições da API  
 
-## Code scaffolding
+### 🔹 Frontend  
+- **Angular** - Framework frontend para consumir a API  
+- **Tailwind CSS** - Estilização da aplicação  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 📌 Funcionalidades  
 
-## Build
+- Criar, listar, atualizar e excluir tarefas  
+- Marcar tarefas como concluídas  
+- Separação entre tarefas pendentes e concluídas  
+- Persistência dos dados no banco de dados  
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🌐 Rotas da API  
 
-## Running unit tests
+| Método  | Rota                 | Descrição |
+|---------|----------------------|-----------|
+| GET     | `/todos`             | Retorna todas as tarefas |
+| POST    | `/todos`             | Cria uma nova tarefa |
+| PUT     | `/todos/{id}`        | Atualiza uma tarefa existente |
+| DELETE  | `/todos/{id}`        | Remove uma tarefa |
+| GET     | `/todos/{id}`        | Retorna uma tarefa pelo ID |
+| PUT    | `/todos/{id}/finalizar`        | Marca uma tarefa como concluída |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🔧 Como Executar o Projeto  
 
-## Running end-to-end tests
+### Backend  
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone o repositório:  
+   ```bash
+   git clone https://github.com/matheusilveiraw/to-do-list-angular-back
+   cd seu-repositorio
 
-## Further help
+2. Instale as dependências:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+    composer install
+```
+
+3. Instale as dependências:
+
+Configure o banco de dados no arquivo .env e execute as migrações:
+
+```
+    php artisan migrate
+```  
+
+3. Inicie o servidor:
+
+```
+    php artisan serve
+```  
+
+Com isso o backend deve estar rodando.
+
+### Frontend  
+1. Clone o repositório:  
+
+   ```bash
+   git clone https://github.com/matheusilveiraw/to-do-list-angular-front
+   cd seu-repositorio
+
+2. Acesse a pasta do frontend e instale as dependências:
+ 
+```
+    npm install
+```  
+
+3. Inicie o servidor Angular:
+
+Configure o banco de dados no arquivo .env e execute as migrações:
+
+```
+    ng serve
+```  
+    
+Com isso o backend deve estar rodando em http://localhost:4200.
