@@ -40,7 +40,7 @@ export class LayoutToDoListComponent {
       this.abrirTelaDeCarregar();
 
       this.http
-        .post<{ descricao: string }>(`${this.apiUrl}ctodo`, dto)
+        .post<{ descricao: string }>(`${this.apiUrl}todos`, dto)
         .subscribe(
           (response) => {
             console.log('Tarefa criada com sucesso:', response);
@@ -60,7 +60,7 @@ export class LayoutToDoListComponent {
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
       this.abrirTelaDeCarregar();
       this.http
-        .delete(`${this.apiUrl}rtodo/${this.tarefas[index].id}`)
+        .delete(`${this.apiUrl}todos/${this.tarefas[index].id}`)
         .subscribe(() => {
           this.tarefas.splice(index, 1);
           this.fecharTelaDeCarregar();
@@ -72,7 +72,7 @@ export class LayoutToDoListComponent {
     if (window.confirm('Tem certeza que deseja finalizar esta tarefa?')) {
       this.abrirTelaDeCarregar();
       this.http
-        .post(`${this.apiUrl}ftodo/${this.tarefas[index].id}`, { })
+        .put(`${this.apiUrl}todos/${this.tarefas[index].id}/finalizar`, { })
         .subscribe(() => {
           this.tarefas[index].status = 1;
           this.fecharTelaDeCarregar();
@@ -98,7 +98,7 @@ export class LayoutToDoListComponent {
       this.abrirTelaDeCarregar();
 
       this.http
-        .put(`${this.apiUrl}atttodo/${id}`, {
+        .put(`${this.apiUrl}todos/${id}`, {
           descricao: this.descricaoEditada,
           status: this.tarefaParaEditar.status,
         })
@@ -113,7 +113,7 @@ export class LayoutToDoListComponent {
   carregarTarefas() {
     this.abrirTelaDeCarregar();
 
-    this.http.get<string[]>(`${this.apiUrl}rtodos`).subscribe(
+    this.http.get<string[]>(`${this.apiUrl}todos`).subscribe(
       (response) => {
         this.tarefas = response;
         this.fecharTelaDeCarregar();
